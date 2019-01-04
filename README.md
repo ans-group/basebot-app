@@ -15,13 +15,18 @@ You'll also need a copy of `config/credentials.dart`
 
 Project Structure
 ---
+
+Everything of revelance to development can be found in the **/lib** folder. 
+
+Within that folder you will find the following:
+
 ### Widgets
 All of the main Flutter widgets go here (they're kinda like React components). 
 
 ### Services
 These are generally specialised dart classes that handle things like auth, conversation instances etc. It's a good place abstract non-visual logic.
 
-### config
+### Config
 The first attempts at abstracting some of the project variables. There's only a credentials (not included in repo) and theme file in there currently. 
 
 Libraries Used
