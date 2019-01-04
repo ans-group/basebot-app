@@ -158,48 +158,53 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             data: IconThemeData(color: Theme.of(context).primaryColor),
             child: _loading
                 ? Loading()
-                : Column(children: [
-                    Header(),
-                    Flexible(
-                        child: ListView.builder(
-                      padding: new EdgeInsets.symmetric(horizontal: 8.0),
-                      controller: _scrollController,
-                      // reverse: true,
-                      itemBuilder: (_, int index) {
-                        if ((index + 1) > _messages.length) {
-                          if (_messages.length > 0 &&
-                              _messages[_messages.length - 1].typing) {
-                            ChatMessage _message = ChatMessage(
-                              text: 'typing',
-                              name: 'saga',
-                              typing: true,
-                              loading: true,
-                              transitionController:
-                                  _messages[0].transitionController,
-                            );
-                            return _message;
+                : Stack(children: [
+                    Column(children: [
+                      Flexible(
+                          child: ListView.builder(
+                        padding: new EdgeInsets.only(
+                            left: 8.0, right: 8.0, top: 130.0),
+                        controller: _scrollController,
+                        // reverse: true,
+                        itemBuilder: (_, int index) {
+                          if ((index + 1) > _messages.length) {
+                            if (_messages.length > 0 &&
+                                _messages[_messages.length - 1].typing) {
+                              ChatMessage _message = ChatMessage(
+                                text: 'typing',
+                                name: 'saga',
+                                typing: true,
+                                loading: true,
+                                transitionController:
+                                    _messages[0].transitionController,
+                              );
+                              return _message;
+                            }
+                          } else {
+                            return _messages[index];
                           }
-                        } else {
-                          return _messages[index];
-                        }
-                      },
-                      itemCount:
-                          _messages.length > 0 ? _messages.length + 1 : 0,
-                    )),
-                    Container(
-                        height: _quickReplies.length > 0 ? 50.0 : 0.0,
-                        alignment: Alignment.centerRight,
-                        child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            children:
-                                _quickReplies.map((reply) => reply).toList())),
-                    Divider(
-                        height: 1.0, color: Color.fromRGBO(229, 230, 230, 1.0)),
-                    Container(
-                        decoration:
-                            BoxDecoration(color: Theme.of(context).cardColor),
-                        child: _buildTextComposer())
+                        },
+                        itemCount:
+                            _messages.length > 0 ? _messages.length + 1 : 0,
+                      )),
+                      Container(
+                          height: _quickReplies.length > 0 ? 50.0 : 0.0,
+                          alignment: Alignment.centerRight,
+                          child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              children: _quickReplies
+                                  .map((reply) => reply)
+                                  .toList())),
+                      Divider(
+                          height: 1.0,
+                          color: Color.fromRGBO(229, 230, 230, 1.0)),
+                      Container(
+                          decoration:
+                              BoxDecoration(color: Theme.of(context).cardColor),
+                          child: _buildTextComposer())
+                    ]),
+                    Header()
                   ])));
   }
 }

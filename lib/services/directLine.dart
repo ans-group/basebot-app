@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'dart:async';
 import 'dart:convert';
 
 import '../config/credentials.dart';
@@ -9,6 +10,10 @@ final auth = Auth();
 
 class DirectLine {
   String _token;
+
+  DirectLine() {
+    Timer.periodic(Duration(minutes: 2), (Timer t) => refreshToken(_token));
+  }
 
   Future<String> get token async {
     String token = _token;
@@ -20,7 +25,7 @@ class DirectLine {
       }
     }
     final refreshStatus = await refreshToken(token);
-    if (refreshStatus == 403) {
+    if (refreshStatus == 403 || refreshStatus == 400) {
       token = await _generateToken();
     }
     return token;
@@ -34,6 +39,9 @@ class DirectLine {
   }
 
   Future<int> refreshToken(token) async {
+    if (token == null) {
+      return 0;
+    }
     final response = await http.post(
         'https://directline.botframework.com/v3/directline/tokens/refresh',
         headers: {"Authorization": "Bearer $token"});

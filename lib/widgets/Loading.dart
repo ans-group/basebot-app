@@ -13,7 +13,7 @@ class Loading extends StatelessWidget {
               flex: 1,
               fit: FlexFit.tight,
               child: ClipPath(
-                clipper: HeroClipper(),
+                clipper: HeroClipper(35.0),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -26,7 +26,7 @@ class Loading extends StatelessWidget {
                   ),
                   child: Container(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 80.0),
+                          horizontal: 30.0, vertical: 100.0),
                       child: Column(children: [
                         Image.asset('assets/netty.png',
                             fit: BoxFit.scaleDown,
@@ -43,26 +43,28 @@ class Loading extends StatelessWidget {
                 ),
               ))
         ]),
-        Text(
-          'Meet NETTY',
-          style: TextStyle(
-            fontSize: 25.0,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        Text(
-          'Your Digital Uni Assistant',
-          style: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+        // Text(
+        //   'Meet NETTY',
+        //   style: TextStyle(
+        //     fontSize: 25.0,
+        //     fontWeight: FontWeight.w700,
+        //   ),
+        // ),
+        // Text(
+        //   'Your Digital Uni Assistant',
+        //   style: TextStyle(
+        //     fontSize: 20.0,
+        //     fontWeight: FontWeight.w500,
+        //   ),
+        // ),
         Flexible(
             fit: FlexFit.tight,
             child: Container(
-                alignment: Alignment.bottomCenter,
+                alignment: Alignment.center,
                 padding: EdgeInsets.symmetric(vertical: 50.0),
-                child: Text('loading...', style: TextStyle(fontSize: 18.0))))
+                child: Text('loading...',
+                    style: TextStyle(
+                        fontSize: 25.0, fontWeight: FontWeight.w700))))
       ],
     );
   }
