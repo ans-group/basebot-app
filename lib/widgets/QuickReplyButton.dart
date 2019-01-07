@@ -20,19 +20,20 @@ class QuickReplyButton extends StatelessWidget {
               opacity: CurvedAnimation(
                   parent: this.transitionController, curve: Curves.easeOut),
               child: Container(
-                  margin: EdgeInsets.all(5.0),
+                  margin: EdgeInsets.only(
+                      left: 4.0, right: 6.0, top: 15.0, bottom: 12.0),
                   child: OutlineButton(
-                        child: Text(text),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                        color: theme.primaryColor,
-                        borderSide: BorderSide(color: theme.primaryColor),
-                        highlightColor: theme.primaryColor,
-                        highlightedBorderColor: theme.primaryColor,
-                        splashColor: theme.primaryColor,
-                        textColor: theme.primaryColor,
-                        onPressed: action,
-                  )
-              ),
+                    child: Text(text),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                    color: theme.primaryColor,
+                    borderSide: BorderSide(color: theme.primaryColor),
+                    highlightColor: theme.primaryColor,
+                    highlightedBorderColor: theme.primaryColor,
+                    splashColor: theme.primaryColor,
+                    textColor: theme.primaryColor,
+                    onPressed: action,
+                  )),
             )));
   }
 }

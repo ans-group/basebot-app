@@ -2,11 +2,25 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
-Future<String> initNotifications() async {
-  _firebaseMessaging.configure(onMessage: (Map<String, dynamic> message) async {
-    print("onMessage: $message");
-    print(message);
-  });
+Future<String> initNotifications(handleMessage) async {
+  final handleNotification = (Map<String, dynamic> rawMessage) async {
+    print("onMessage: $rawMessage");
+    String text = rawMessage['text'];
+    if (rawMessage['data'] != null && rawMessage['data']['text'] != null) {
+      text = rawMessage['data']['text'];
+    }
+    if (rawMessage['notification'] != null &&
+        rawMessage['notification']['body'] != null) {
+      text = rawMessage['notification']['body'];
+    }
+    if (text == null) return false;
+    final message = {"text": text, "from": 'saga', "typing": false};
+    handleMessage(message);
+  };
+  _firebaseMessaging.configure(
+      onMessage: handleNotification,
+      onResume: handleNotification,
+      onLaunch: handleNotification);
   _firebaseMessaging.requestNotificationPermissions(
       const IosNotificationSettings(sound: true, badge: true, alert: true));
   _firebaseMessaging.onIosSettingsRegistered
