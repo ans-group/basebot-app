@@ -1,13 +1,22 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'dart:convert';
 
 final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
-Future<String> initNotifications(handleMessage) async {
+Future<String> initNotifications(handleMessage, handleQuickReplies) async {
   final handleNotification = (Map<String, dynamic> rawMessage) async {
-    print("onMessage: $rawMessage");
+    print("notifaction received: $rawMessage");
     String text = rawMessage['text'];
-    if (rawMessage['data'] != null && rawMessage['data']['text'] != null) {
-      text = rawMessage['data']['text'];
+    List quickReplies = rawMessage['quick_replies'] != null
+        ? json.decode(rawMessage['quick_replies'])
+        : null;
+    if (rawMessage['data'] != null) {
+      if (rawMessage['data']['text'] != null) {
+        text = rawMessage['data']['text'];
+      }
+      if (rawMessage['data']['quick_replies'] != null) {
+        quickReplies = json.decode(rawMessage['data']['quick_replies']);
+      }
     }
     if (rawMessage['notification'] != null &&
         rawMessage['notification']['body'] != null) {
@@ -16,6 +25,9 @@ Future<String> initNotifications(handleMessage) async {
     if (text == null) return false;
     final message = {"text": text, "from": 'saga', "typing": false};
     handleMessage(message);
+    if (quickReplies != null) {
+      handleQuickReplies(quickReplies);
+    }
   };
   _firebaseMessaging.configure(
       onMessage: handleNotification,
