@@ -29,7 +29,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
         onQuickReplies: _handleQuickReplies,
         onAttachments: _handleAttachment,
         onReady: _handleFinishedLoading);
-    initNotifications(_handleMessage, _handleQuickReplies).then((pushToken) {
+    initNotifications(_conversation).then((pushToken) {
       _conversation.pushToken = pushToken;
     });
   }

@@ -52,7 +52,6 @@ class DirectLine {
     final user = await auth.user;
     final userName = user.displayName;
     final uid = user.uid;
-    print('generating token for $userName');
     final generateTokenUrl =
         "https://directline.botframework.com/v3/directline/tokens/generate";
     final secret = Credentials.dlSecret;
@@ -64,7 +63,6 @@ class DirectLine {
           "Authorization": "Bearer $secret",
           'Content-Type': 'application/json'
         });
-    print(response);
     final responseBody = json.decode(response.body);
     final token = responseBody['token'];
     this.token = token;

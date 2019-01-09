@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 import './auth.dart';
+// import '../config/credentials.dart';
 import './directLine.dart';
 
 final auth = Auth();
@@ -35,10 +36,13 @@ class Conversation {
     assert(_convoId != null);
     assert(user != null);
 
-    final from = {"id": "dl_${user.uid}", "name": user.displayName};
+    final from = {
+      "id": "dl_${user.uid}",
+      "name": user.displayName != "" ? user.displayName : "Anonymous"
+    };
     final body = {
       "from": from,
-      "type": "message",
+      "type": 'message',
       "text": text,
       "pushToken": this.pushToken,
       "authToken": await auth.jwt
@@ -51,6 +55,41 @@ class Conversation {
           "Authorization": "Bearer $token",
           "Content-Type": 'application/json'
         });
+    print(body);
+    print(response.body);
+  }
+
+  void sendEvent(trigger, {quickReplies: null}) async {
+    if (trigger == null) {
+      return;
+    }
+    final token = await dl.token;
+    final user = await auth.user;
+    assert(token != null);
+    assert(_convoId != null);
+    assert(user != null);
+
+    final from = {
+      "id": "dl_${user.uid}",
+      "name": user.displayName != "" ? user.displayName : "Anonymous"
+    };
+    final body = {
+      "from": from,
+      "type": 'event',
+      "trigger": trigger,
+      "pushToken": this.pushToken,
+      "authToken": await auth.jwt,
+      "quick_replies": quickReplies
+    };
+    final postActivityUrl =
+        "https://directline.botframework.com/v3/directline/conversations/$_convoId/activities";
+    final response = await http.post(postActivityUrl,
+        body: json.encode(body),
+        headers: {
+          "Authorization": "Bearer $token",
+          "Content-Type": 'application/json'
+        });
+    print(body);
     print(response.body);
   }
 
@@ -62,7 +101,6 @@ class Conversation {
 
     onReady();
     channel.stream.listen((message) {
-      print(message);
       if (message != null) {
         try {
           final activities = json.decode(message)['activities'];
@@ -91,7 +129,7 @@ class Conversation {
             }
           }
         } catch (err) {
-          print(err);
+          return false;
         }
       }
     });
@@ -126,17 +164,16 @@ class Conversation {
   }
 
 //   Future<String> _reconnectToConversation() async {
-//     final token = await DirectLine().token;
+//     final secret = Credentials.dlSecret;
 //     final convoId = await this.convoId;
-//     assert(token != null);
+//     assert(secret != null);
 //     final watermark = await this.watermark;
 //     final url =
 //         "https://directline.botframework.com/v3/directline/conversations/${convoId}?watermark=${watermark}";
 
 //     final response =
-//         await http.get(url, headers: {"Authorization": "Bearer ${token}"});
+//         await http.get(url, headers: {"Authorization": "Bearer $secret"});
 //     final body = json.decode(response.body);
-//     print(body);
 //     return body['streamUrl'];
 //   }
 
