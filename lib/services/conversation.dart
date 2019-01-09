@@ -55,7 +55,6 @@ class Conversation {
           "Authorization": "Bearer $token",
           "Content-Type": 'application/json'
         });
-    print(body);
     print(response.body);
   }
 
@@ -89,7 +88,6 @@ class Conversation {
           "Authorization": "Bearer $token",
           "Content-Type": 'application/json'
         });
-    print(body);
     print(response.body);
   }
 
