@@ -20,7 +20,7 @@ class Auth {
       return _jwt;
     } else {
       final user = await this.user;
-      final jwt = await user.getIdToken();
+      final jwt = await user.getIdToken(refresh: true);
       _jwt = jwt;
       return jwt;
     }
