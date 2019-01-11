@@ -37,7 +37,9 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon" 
   ios: true
-  image_path: "assets/.png"
+  image_path: "assets/netty_icon.jpg"
+  adaptive_icon_foreground: "assets/netty_icon.png"
+  adaptive_icon_background: "#ed612e"
 
 
 # For information on the generic Dart part of this file, see the
