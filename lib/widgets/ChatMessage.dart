@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 import '../config/theme.dart';
 import './LoadingDot.dart';
@@ -33,6 +33,7 @@ class ChatMessage extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 8.0),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: this.name == 'saga'
                       ? MainAxisAlignment.start
                       : MainAxisAlignment.end,
@@ -74,27 +75,20 @@ class ChatMessage extends StatelessWidget {
                                 LoadingDot(delay: 0.3),
                                 LoadingDot(delay: 0.6),
                               ])
-                            : Text(text,
-                                style: TextStyle(
-                                    color: this.name == 'saga'
-                                        ? null
-                                        : Colors.white))
-                        // Markdown is supported by QNA Maker so supporting the rendering of markdown
-                        // Could be good, and while the solution below does work, it messes up the width
-                        // of the message boxes. So, for the meantime we're just falling back to regular Text
-                        // : MarkdownBody(
-                        //     data: text,
-                        //     styleSheet: MarkdownStyleSheet.fromTheme(
-                        //             Theme.of(context))
-                        //         .copyWith(
-                        //             p: Theme.of(context)
-                        //                 .textTheme
-                        //                 .body1
-                        //                 .copyWith(
-                        //                     color: this.name == 'saga' ? null : Colors.white,
-                        //                     fontSize: 14.0)),
-                        //   )
-                        )
+                            : MarkdownBody(
+                                data: text,
+                                styleSheet: MarkdownStyleSheet.fromTheme(
+                                        Theme.of(context))
+                                    .copyWith(
+                                        p: Theme.of(context)
+                                            .textTheme
+                                            .body1
+                                            .copyWith(
+                                                color: this.name == 'saga'
+                                                    ? null
+                                                    : Colors.white,
+                                                fontSize: 14.0)),
+                              ))
                   ],
                 ),
               ),

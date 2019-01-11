@@ -16,7 +16,8 @@ dependencies:
   web_socket_channel: ^1.0.9
   http: 0.12.0
   shared_preferences: ^0.4.3
-  flutter_markdown: ^0.2.0
+  flutter_markdown:
+    path: ./vendor/flutter_markdown-0.2.0-local
   firebase_core: ^0.2.5
   firebase_messaging: ^2.1.0
   firebase_auth: ^0.6.6
