@@ -25,7 +25,7 @@ class DirectLine {
       }
     }
     final refreshStatus = await refreshToken(token);
-    if (refreshStatus == 403 || refreshStatus == 400) {
+    if (refreshStatus != 200) {
       token = await _generateToken();
     }
     return token;

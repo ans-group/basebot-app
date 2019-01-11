@@ -26,8 +26,8 @@ class Conversation {
         onReady: onReady);
   }
 
-  void send(text) async {
-    if (text == null) {
+  void send({text, trigger}) async {
+    if (text == null && trigger == null) {
       return;
     }
     final token = await dl.token;
@@ -42,44 +42,16 @@ class Conversation {
     };
     final body = {
       "from": from,
-      "type": 'message',
-      "text": text,
       "pushToken": this.pushToken,
       "authToken": await auth.jwt
     };
-    final postActivityUrl =
-        "https://directline.botframework.com/v3/directline/conversations/$_convoId/activities";
-    final response = await http.post(postActivityUrl,
-        body: json.encode(body),
-        headers: {
-          "Authorization": "Bearer $token",
-          "Content-Type": 'application/json'
-        });
-    print(response.body);
-  }
-
-  void sendEvent(trigger, {quickReplies: null}) async {
-    if (trigger == null) {
-      return;
+    if (text != null) {
+      body['type'] = 'message';
+      body['text'] = text;
+    } else if (trigger != null) {
+      body['type'] = 'event';
+      body['trigger'] = trigger;
     }
-    final token = await dl.token;
-    final user = await auth.user;
-    assert(token != null);
-    assert(_convoId != null);
-    assert(user != null);
-
-    final from = {
-      "id": "dl_${user.uid}",
-      "name": user.displayName != "" ? user.displayName : "Anonymous"
-    };
-    final body = {
-      "from": from,
-      "type": 'event',
-      "trigger": trigger,
-      "pushToken": this.pushToken,
-      "authToken": await auth.jwt,
-      "quick_replies": quickReplies
-    };
     final postActivityUrl =
         "https://directline.botframework.com/v3/directline/conversations/$_convoId/activities";
     final response = await http.post(postActivityUrl,

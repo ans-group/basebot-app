@@ -89,7 +89,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 
   void _handleSubmitted(String text) async {
     _textController.clear();
-    _conversation.send(text);
+    _conversation.send(text: text);
   }
 
   void _handleMessage(Map item) {
