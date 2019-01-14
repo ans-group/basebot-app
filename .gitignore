@@ -38,6 +38,8 @@ build/
 **/android/local.properties
 **/android/key.properties
 **/android/**/GeneratedPluginRegistrant.java
+**/android/.settings/org.eclipse.buildship.core.prefs
+**/android/.project
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
