@@ -116,11 +116,11 @@ class Conversation {
               item['attachments']
                   .forEach((attachment) => onAttachments(attachment));
             }
-            if (onQuickReplies != null &&
-                item['quick_replies'] != null &&
-                item['quick_replies'].length > 0) {
-              onQuickReplies(item['quick_replies']);
-            }
+          }
+          if (onQuickReplies != null &&
+              item['quick_replies'] != null &&
+              item['quick_replies'].length > 0) {
+            onQuickReplies(item['quick_replies']);
           }
         } catch (err) {
           return false;

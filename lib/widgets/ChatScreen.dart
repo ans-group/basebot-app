@@ -5,6 +5,7 @@ import './Header.dart';
 import './Loading.dart';
 import './QuickReplyButton.dart';
 import './ChatMessage.dart';
+import './ChatAttachment.dart';
 import '../services/conversation.dart';
 import '../services/notifications.dart';
 
@@ -16,10 +17,9 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   Conversation _conversation;
   final ScrollController _scrollController = new ScrollController();
   final TextEditingController _textController = TextEditingController();
-  final List<ChatMessage> _messages = <ChatMessage>[];
+  final List _messages = [];
   List<QuickReplyButton> _quickReplies = <QuickReplyButton>[];
   bool _loading = true;
-//   List<Button> _buttons = <Button>[];
 
   @override
   initState() {
@@ -36,12 +36,9 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    for (ChatMessage message in _messages) {
+    for (var message in _messages) {
       message.transitionController.dispose();
     }
-    // for (Button button in _buttons) {
-    //   button.transitionController.dispose();
-    // }
     for (QuickReplyButton quickReply in _quickReplies) {
       quickReply.transitionController.dispose();
     }
@@ -52,22 +49,9 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     setState(() => _loading = false);
   }
 
-  void _handleAttachment(Map attachment) {
-    // if (attachment['type'] == 'buttons' && attachment['buttons'] != null) {
-    //   var buttons = attachment['buttons'];
-    //   buttons.forEach((button) {
-    //     var buttonWidget = Button(
-    //         text: button['title'],
-    //         action: () => _handleSubmitted(button['value']),
-    //         transitionController: AnimationController(
-    //           duration: Duration(milliseconds: 300),
-    //           vsync: this,
-    //         ));
-    //     _buttons.insert(0, buttonWidget);
-    //     buttonWidget.transitionController.forward();
-    //     _updateScroll();
-    //   });
-    // }
+  void _handleSubmitted(String text) async {
+    _textController.clear();
+    _conversation.send(text: text);
   }
 
   void _handleQuickReplies(List replies) {
@@ -87,9 +71,26 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     }
   }
 
-  void _handleSubmitted(String text) async {
-    _textController.clear();
-    _conversation.send(text: text);
+  void _handleAttachment(Map item) {
+    print("handling attachment: $item");
+    final title = item['title'];
+    final image = item['image'];
+    final link = item['link'];
+    final values = item['values'];
+    ChatAttachment attachment = ChatAttachment(
+        title: title,
+        image: image,
+        link: link,
+        values: values,
+        transitionController: AnimationController(
+          duration: Duration(milliseconds: 300),
+          vsync: this,
+        ));
+    setState(() {
+      _messages.insert(_messages.length, attachment);
+    });
+    attachment.transitionController.forward();
+    _updateScroll();
   }
 
   void _handleMessage(Map item) {
@@ -153,7 +154,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(249, 250, 250, 1.0),
+        backgroundColor: Color.fromRGBO(246, 247, 247, 1.0),
         body: IconTheme(
             data: IconThemeData(color: Theme.of(context).primaryColor),
             child: _loading
@@ -167,6 +168,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                         controller: _scrollController,
                         // reverse: true,
                         itemBuilder: (_, int index) {
+                          print('MESSAGES: $_messages');
                           if ((index + 1) > _messages.length) {
                             if (_messages.length > 0 &&
                                 _messages[_messages.length - 1].typing) {
