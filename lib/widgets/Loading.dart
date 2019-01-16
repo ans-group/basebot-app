@@ -43,20 +43,6 @@ class Loading extends StatelessWidget {
                 ),
               ))
         ]),
-        // Text(
-        //   'Meet NETTY',
-        //   style: TextStyle(
-        //     fontSize: 25.0,
-        //     fontWeight: FontWeight.w700,
-        //   ),
-        // ),
-        // Text(
-        //   'Your Digital Uni Assistant',
-        //   style: TextStyle(
-        //     fontSize: 20.0,
-        //     fontWeight: FontWeight.w500,
-        //   ),
-        // ),
         Flexible(
             fit: FlexFit.tight,
             child: Container(

@@ -1,5 +1,5 @@
-name: Netty
-description: Netty mobile client.
+name: Exie
+description: Exie mobile client.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -7,7 +7,7 @@ description: Netty mobile client.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 1.0.8+8
+version: 2.0.0+9
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
