@@ -1,6 +1,6 @@
 # Exie App
 
-![Exie Banner](https://i.imgur.com/9hjOCRZ.jpg)
+![Exie Banner](https://i.imgur.com/GGbRymm.jpg)
 
 This repo contains the two native IOS and Android apps for Exie - built with [Flutter](https://flutter.io)
 
