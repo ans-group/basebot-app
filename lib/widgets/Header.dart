@@ -39,7 +39,7 @@ class Header extends StatelessWidget {
                                 alignment: Alignment.topCenter,
                                 width: MediaQuery.of(context).size.width / 7),
                             Text(
-                              'NETTY',
+                              'EXIE',
                               style: TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w500,

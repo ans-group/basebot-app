@@ -20,7 +20,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Netty",
+        title: "Exie",
         debugShowCheckedModeBanner: false,
         home: Theme(data: theme, child: Container(child: ChatScreen())));
   }
