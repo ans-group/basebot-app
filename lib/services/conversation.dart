@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:web_socket_channel/io.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:just_debounce_it/just_debounce_it.dart';
 import 'dart:convert';
 import 'dart:async';
 
@@ -40,9 +41,7 @@ class Conversation {
     if (text == null && trigger == null) {
       return;
     }
-    final token = this.dlToken;
     final user = await auth.user;
-    assert(token != null);
     assert(_convoId != null);
     assert(user != null);
 
@@ -64,12 +63,19 @@ class Conversation {
     }
     final postActivityUrl =
         "https://directline.botframework.com/v3/directline/conversations/$_convoId/activities";
-    final response = await http.post(postActivityUrl,
-        body: json.encode(body),
-        headers: {
-          "Authorization": "Bearer $token",
-          "Content-Type": 'application/json'
-        });
+    final data = text != null ? text : trigger;
+    final type = text != null ? 'text' : 'trigger';
+    Debounce.milliseconds(
+        900, _postActivity, [postActivityUrl, body, data, type]);
+  }
+
+  void _postActivity(url, body, data, type) async {
+    final token = this.dlToken;
+    assert(token != null);
+    final response = await http.post(url, body: json.encode(body), headers: {
+      "Authorization": "Bearer $token",
+      "Content-Type": 'application/json'
+    });
     final responseBody = json.decode(response.body);
     print(responseBody);
     if (responseBody['error'] != null) {
@@ -79,10 +85,10 @@ class Conversation {
           onQuickReplies: this.onQuickReplies,
           onAttachments: this.onAttachments,
           onReady: this.onReady);
-      if (text != null) {
-        send(text: text);
+      if (type == 'text') {
+        send(text: data);
       } else {
-        send(trigger: trigger);
+        send(trigger: data);
       }
     }
   }
