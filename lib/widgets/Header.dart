@@ -34,7 +34,7 @@ class Header extends StatelessWidget {
                           padding: EdgeInsets.only(
                               top: MediaQuery.of(context).size.width / 17),
                           child: Column(children: [
-                            Image.asset('assets/netty.png',
+                            Image.asset('assets/bot.png',
                                 fit: BoxFit.scaleDown,
                                 alignment: Alignment.topCenter,
                                 width: MediaQuery.of(context).size.width / 7),

@@ -43,7 +43,7 @@ class ChatMessage extends StatelessWidget {
                       child: this.name == 'saga'
                           ? CircleAvatar(
                               backgroundImage:
-                                  AssetImage('assets/netty_icon.jpg'),
+                                  AssetImage('assets/bot_icon.jpg'),
                               backgroundColor: Theme.of(context).primaryColor,
                               radius: 11.0)
                           : null,

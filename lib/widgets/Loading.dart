@@ -28,7 +28,7 @@ class Loading extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                           horizontal: 30.0, vertical: 100.0),
                       child: Column(children: [
-                        Image.asset('assets/netty.png',
+                        Image.asset('assets/bot.png',
                             fit: BoxFit.scaleDown,
                             alignment: Alignment.topCenter,
                             width: 270.0),
