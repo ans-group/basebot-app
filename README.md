@@ -1,8 +1,6 @@
-# Exie App
+# Basebot App
 
-![Exie Banner](https://i.imgur.com/GGbRymm.jpg)
-
-This repo contains the two native IOS and Android apps for Exie - built with [Flutter](https://flutter.io)
+This repo contains the two native IOS and Android apps for Basebot - built with [Flutter](https://flutter.io)
 
 
 
