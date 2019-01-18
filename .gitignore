@@ -1,4 +1,6 @@
 # Miscellaneous
+**/config/*.dart
+!**/config/*.example.dart
 *.class
 *.lock
 *.log
@@ -9,7 +11,6 @@
 .buildlog/
 .history
 .svn/
-config/credentials.dart
 
 # IntelliJ related
 *.iml
