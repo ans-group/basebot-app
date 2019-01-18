@@ -11,7 +11,7 @@ final theme = ThemeData(
             borderRadius: BorderRadius.all(Radius.elliptical(20.0, 20.0))),
         buttonColor: primaryColor,
         textTheme: ButtonTextTheme.primary),
-    splashColor: Colors.white,
+    splashColor: primaryColor,
     primaryColor: primaryColor,
     highlightColor: highlightColor,
     accentColor: secondaryColor,
