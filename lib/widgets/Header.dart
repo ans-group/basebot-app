@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/clippers.dart';
-import '../config/theme.dart';
+import '../config/settings.dart';
 
 class Header extends StatelessWidget {
   @override
@@ -26,8 +26,8 @@ class Header extends StatelessWidget {
                             begin: Alignment.topLeft,
                             end: Alignment(0.3, 0.6),
                             colors: [
-                              theme.primaryColor,
-                              Color.fromRGBO(237, 101, 47, 1.0)
+                              Theme.of(context).primaryColor,
+                              Theme.of(context).highlightColor
                             ]),
                       ),
                       child: Container(
@@ -39,7 +39,7 @@ class Header extends StatelessWidget {
                                 alignment: Alignment.topCenter,
                                 width: MediaQuery.of(context).size.width / 7),
                             Text(
-                              'EXIE',
+                              Settings.botName.toUpperCase(),
                               style: TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w500,

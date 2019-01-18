@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../config/theme.dart';
-
 class QuickReplyButton extends StatelessWidget {
   QuickReplyButton({this.text, this.action, this.transitionController});
   final String text;
@@ -26,12 +24,13 @@ class QuickReplyButton extends StatelessWidget {
                     child: Text(text),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                    color: theme.primaryColor,
-                    borderSide: BorderSide(color: theme.primaryColor),
-                    highlightColor: theme.primaryColor,
-                    highlightedBorderColor: theme.primaryColor,
-                    splashColor: theme.primaryColor,
-                    textColor: theme.primaryColor,
+                    color: Theme.of(context).primaryColor,
+                    borderSide:
+                        BorderSide(color: Theme.of(context).primaryColor),
+                    highlightColor: Theme.of(context).highlightColor,
+                    highlightedBorderColor: Theme.of(context).highlightColor,
+                    splashColor: Theme.of(context).splashColor,
+                    textColor: Theme.of(context).primaryColor,
                     onPressed: action,
                   )),
             )));

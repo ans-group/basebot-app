@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
-import '../config/theme.dart';
 import './LoadingDot.dart';
 
 class ChatMessage extends StatelessWidget {
@@ -45,7 +44,7 @@ class ChatMessage extends StatelessWidget {
                           ? CircleAvatar(
                               backgroundImage:
                                   AssetImage('assets/netty_icon.jpg'),
-                              backgroundColor: theme.primaryColor,
+                              backgroundColor: Theme.of(context).primaryColor,
                               radius: 11.0)
                           : null,
                     ),
@@ -62,10 +61,10 @@ class ChatMessage extends StatelessWidget {
                               colors: this.name == 'saga'
                                   ? [Colors.white, Colors.white]
                                   : [
-                                      theme.primaryColor,
+                                      Theme.of(context).primaryColor,
                                       Color.alphaBlend(
                                           Color.fromRGBO(255, 255, 255, 0.1),
-                                          theme.primaryColor)
+                                          Theme.of(context).primaryColor)
                                     ]),
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         ),

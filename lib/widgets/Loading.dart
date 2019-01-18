@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/clippers.dart';
-import '../config/theme.dart';
+import '../config/settings.dart';
 
 class Loading extends StatelessWidget {
   @override
@@ -20,8 +20,8 @@ class Loading extends StatelessWidget {
                         begin: Alignment.topLeft,
                         end: Alignment(0.3, 0.6),
                         colors: [
-                          theme.primaryColor,
-                          Color.fromRGBO(237, 101, 47, 1.0)
+                          Theme.of(context).primaryColor,
+                          Theme.of(context).highlightColor
                         ]),
                   ),
                   child: Container(
@@ -33,7 +33,7 @@ class Loading extends StatelessWidget {
                             alignment: Alignment.topCenter,
                             width: 270.0),
                         Text(
-                          'Hello Human!',
+                          Settings.introText,
                           style: TextStyle(
                               fontSize: 32.0,
                               fontWeight: FontWeight.w500,

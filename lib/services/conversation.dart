@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'dart:async';
 
 import './auth.dart';
-import '../config/credentials.dart';
+import '../config/settings.dart';
 
 final auth = Auth();
 
@@ -140,7 +140,7 @@ class Conversation {
 
   Future<String> _createConversation() async {
     final user = await auth.user;
-    final secret = Credentials.dlSecret;
+    final secret = Settings.dlSecret;
     assert(user != null);
     assert(secret != null);
     final uid = user.uid;

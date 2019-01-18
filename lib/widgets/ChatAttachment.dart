@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 
 import '../services/iconsByName.dart';
-import '../config/theme.dart';
 
 class LinkButton extends StatelessWidget {
   LinkButton({this.text, this.url});
@@ -11,14 +10,14 @@ class LinkButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
+    return FlatButton(
       padding: EdgeInsets.symmetric(vertical: 9.0, horizontal: 19.0),
       child: Text("$text",
           style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400)),
-      color: theme.primaryColor,
-      highlightColor: theme.primaryColor,
-      splashColor: Colors.white,
-      textColor: Colors.white,
+      color: Theme.of(context).primaryColor,
+      highlightColor: Theme.of(context).highlightColor,
+      splashColor: Theme.of(context).splashColor,
+      textTheme: Theme.of(context).buttonTheme.textTheme,
       onPressed: () async {
         try {
           await launch(
