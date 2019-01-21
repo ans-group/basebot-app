@@ -20,7 +20,17 @@ Aside from that you'll want to spend some time in the `lib/config` folder tweaki
 **Make sure you change `dlSecret` to a Direct Line secret in `lib/config/settings.dart` or your app won't work**
 
 ### Theming
-To change the theme - head over to `lib/config/theme.dart`. Changing the colour scheme is a breeze. The 3 main colours you'll need are at the top and are written in a format that's identical to `rgba()` in CSS (for those not familiar with Dart). Everything else should be relatively self-explanatory. See [here](https://flutter.io/docs/cookbook/design/themes) for more info. 
+To change the theme - head over to `lib/config/theme.dart`. Changing the colour scheme is a breeze. The 3 main colours you'll need are at the top and are written in a format that's identical to `rgba()` in CSS (for those not familiar with Dart). Everything else should be relatively self-explanatory. See [here](https://flutter.io/docs/cookbook/design/themes) for more info.
+
+### Icons
+To update the icons & images just use the ones currently in `play-store-listing` and `assets`. Each file is used for the following:
+
+- **assets/bot_icon.jpg** - launcher icon
+- **assets/bot_icon.png** - [adaptive](https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive) launcher icon
+- **assets/bot.png** The image of the bot to be used in-app
+- **play-store-listing/banner** The banner image for the Play Store
+- **play-store-listing/icon.png** The Play Store icon
+- **play-store-listing/screen1/2/3.jpg** 3 screenshots for the Play Store
 
 ### Building
 To build, you'll need the following:
