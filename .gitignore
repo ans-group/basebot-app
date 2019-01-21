@@ -40,7 +40,9 @@ build/
 **/android/key.properties
 **/android/**/GeneratedPluginRegistrant.java
 **/android/.settings/org.eclipse.buildship.core.prefs
+**/android/service-account.json
 **/android/.project
+**/android/app/google-services.json
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
@@ -67,6 +69,7 @@ build/
 **/ios/Flutter/flutter_assets/
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/Runner/GoogleService-Info.plist
 
 # Exceptions to above rules.
 !**/ios/**/default.mode1v3
