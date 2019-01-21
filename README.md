@@ -35,19 +35,7 @@ To update the icons & images just use the ones currently in `play-store-listing`
 **:warning: You need to run run `basebot icons` after changing these files to generate new launcher icons**
 
 ### Building
-To build, you'll need the following:
-- [Flutter SDK](https://flutter.io/docs/get-started/install/macos#get-the-flutter-sdk) (installed by the CLI tool)
-- [Android Studio](https://developer.android.com/studio/install) or Android Studio SDKs (Android)
-- A [keystore/key](https://flutter.io/docs/deployment/android#signing-the-app) (Android)
-- [Xcode](https://flutter.io/docs/get-started/install/macos#install-xcode) (IOS)
-
-When building for the first time you'll want to generate a keystore with:
-
-`keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key` 
-
-You then need to reference it in `android/key.properties` (key alias will be `key` and storeFile will be `~/key.jks` if you ran the commad as above)
-
-Build with `basebot build`
+Thanks to the magic of CI building should happen automatically. Just push to master :+1: 
 
 ---
 
