@@ -49,14 +49,6 @@ You then need to reference it in `android/key.properties` (key alias will be `ke
 
 Build with `basebot build`
 
---- 
-
-Development
----
-See Flutter's [getting started guide](https://flutter.io/docs/get-started/install)
-
-You'll also need a copy of `config/credentials.dart`
-
 ---
 
 Project Structure
