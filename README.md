@@ -2,18 +2,53 @@
 
 This repo contains the two native IOS and Android apps for Basebot - built with [Flutter](https://flutter.io)
 
+Setup
+---
+To get started use the CLI tool:
 
+- `npm i -g @webantic/basebot-cli`
+- `basebot create`
 
+---
 
-Getting Started
+Customisation & Building
+---
+The CLI tool will customise the name in various locations when you run `create`.
+
+Aside from that you'll want to spend some time in the `lib/config` folder tweaking the theme and adding any missing credentials (the files you need will be created by the CLI tool). 
+
+**Make sure you change `dlSecret` to a Direct Line secret in `lib/config/settings.dart` or your app won't work**
+
+### Theming
+To change the theme - head over to `lib/config/theme.dart`. Changing the colour scheme is a breeze. The 3 main colours you'll need are at the top and are written in a format that's identical to `rgba()` in CSS (for those not familiar with Dart). Everything else should be relatively self-explanatory. See [here](https://flutter.io/docs/cookbook/design/themes) for more info. 
+
+### Building
+To build, you'll need the following:
+- [Flutter SDK](https://flutter.io/docs/get-started/install/macos#get-the-flutter-sdk) (installed by the CLI tool)
+- [Android Studio](https://developer.android.com/studio/install) or Android Studio SDKs (Android)
+- A [keystore/key](https://flutter.io/docs/deployment/android#signing-the-app) (Android)
+- [Xcode](https://flutter.io/docs/get-started/install/macos#install-xcode) (IOS)
+
+When building for the first time you'll want to generate a keystore with:
+
+`keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key` 
+
+You then need to reference it in `android/key.properties` (key alias will be `key` and storeFile will be `~/key.jks` if you ran the commad as above)
+
+Build with `basebot build`
+
+--- 
+
+Development
 ---
 See Flutter's [getting started guide](https://flutter.io/docs/get-started/install)
 
 You'll also need a copy of `config/credentials.dart`
 
-Project Structure
 ---
 
+Project Structure
+---
 Everything of revelance to development can be found in the **/lib** folder. 
 
 Within that folder you will find the following:
@@ -25,7 +60,9 @@ All of the main Flutter widgets go here (they're kinda like React components).
 These are generally specialised dart classes that handle things like auth, conversation instances etc. It's a good place abstract non-visual logic.
 
 ### Config
-The first attempts at abstracting some of the project variables. There's only a credentials (not included in repo) and theme file in there currently. 
+The first attempts at abstracting some of the project variables. There's only a settings and theme file in there currently.
+
+---
 
 Libraries Used
 ---
