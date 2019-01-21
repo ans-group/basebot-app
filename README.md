@@ -17,7 +17,7 @@ The CLI tool will customise the name in various locations when you run `create`.
 
 Aside from that you'll want to spend some time in the `lib/config` folder tweaking the theme and adding any missing credentials (the files you need will be created by the CLI tool). 
 
-**Make sure you change `dlSecret` to a Direct Line secret in `lib/config/settings.dart` or your app won't work**
+**:warning: Make sure you change `dlSecret` to a Direct Line secret in `lib/config/settings.dart` or your app won't work**
 
 ### Theming
 To change the theme - head over to `lib/config/theme.dart`. Changing the colour scheme is a breeze. The 3 main colours you'll need are at the top and are written in a format that's identical to `rgba()` in CSS (for those not familiar with Dart). Everything else should be relatively self-explanatory. See [here](https://flutter.io/docs/cookbook/design/themes) for more info.
@@ -31,6 +31,8 @@ To update the icons & images just use the ones currently in `play-store-listing`
 - **play-store-listing/banner** The banner image for the Play Store
 - **play-store-listing/icon.png** The Play Store icon
 - **play-store-listing/screen1/2/3.jpg** 3 screenshots for the Play Store
+
+**:warning: You need to run run `basebot icons` after changing these files to generate new launcher icons**
 
 ### Building
 To build, you'll need the following:
