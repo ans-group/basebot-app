@@ -1,45 +1,37 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import '../config/settings.dart';
 
 class Auth {
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  FirebaseUser _user;
-  String _jwt;
+  String _uid;
 
-  Future<FirebaseUser> get user async {
-    if (_user != null) {
-      return _user;
-    } else {
-      final user = await _signInAnonymouslyIfNeeded();
-      _user = user;
-      return user;
-    }
+  Auth() {
+    fetchUID();
   }
 
-  Future<String> get jwt async {
-    if (_jwt != null) {
-      return _jwt;
-    } else {
-      final user = await this.user;
-      final jwt = await user.getIdToken(refresh: true);
-      _jwt = jwt;
-      return jwt;
-    }
+  fetchUID() async {
+    _uid = await this.uid;
   }
 
-  Future<FirebaseUser> _signInAnonymouslyIfNeeded() async {
-    var currentUser = await _auth.currentUser();
-    if (currentUser != null) {
-      return currentUser;
+  set uid(uid) {
+    _uid = uid;
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setString('uid', uid);
+    });
+  }
+
+  Future<String> get uid async {
+    if (_uid != null) {
+      return _uid;
     }
-    final FirebaseUser user = await _auth.signInAnonymously();
-    assert(user != null);
-    assert(user.isAnonymous);
-    assert(!user.isEmailVerified);
-    assert(await user.getIdToken() != null);
-
-    currentUser = await _auth.currentUser();
-    assert(user.uid == currentUser.uid);
-
-    return user;
+    var prefs = await SharedPreferences.getInstance();
+    var uid = prefs.getString('uid');
+    if (uid == null) {
+      final response = await http.get(Settings.registerURI);
+      uid = response.body;
+      this.uid = uid;
+    }
+    _uid = uid;
+    return uid;
   }
 }

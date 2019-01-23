@@ -40,7 +40,7 @@ flutter_icons:
   ios: true
   image_path: "assets/bot_icon.jpg"
   adaptive_icon_foreground: "assets/bot_icon.png"
-  adaptive_icon_background: "#ed612e"
+  adaptive_icon_background: "#46276f"
 
 
 # For information on the generic Dart part of this file, see the

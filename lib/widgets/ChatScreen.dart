@@ -75,12 +75,18 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     print("handling attachment: $item");
     final title = item['title'];
     final image = item['image'];
-    final link = item['link'];
+    final buttons = item['buttons'];
+    final thumb = item['thumb'];
+    final text = item['text'];
+    final color = item['color'];
     final values = item['values'];
     ChatAttachment attachment = ChatAttachment(
         title: title,
         image: image,
-        link: link,
+        text: text,
+        color: color,
+        thumb: thumb,
+        buttons: buttons,
         values: values,
         transitionController: AnimationController(
           duration: Duration(milliseconds: 300),
