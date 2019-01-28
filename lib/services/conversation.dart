@@ -37,22 +37,18 @@ class Conversation {
     Timer.periodic(Duration(minutes: 2), (Timer t) => refreshToken());
   }
 
-  void send({text, trigger}) async {
+  void send({text, trigger, retried: false}) async {
     if (text == null && trigger == null) {
       return;
     }
-    final user = await auth.user;
+    final uid = await auth.uid;
     assert(_convoId != null);
-    assert(user != null);
+    assert(uid != null);
 
-    final from = {
-      "id": "dl_${user.uid}",
-      "name": user.displayName != "" ? user.displayName : "Anonymous"
-    };
+    final from = {"id": "$uid"};
     final body = {
       "from": from,
       "pushToken": this.pushToken,
-      "authToken": await auth.jwt
     };
     if (text != null) {
       body['type'] = 'message';
@@ -66,31 +62,18 @@ class Conversation {
     final data = text != null ? text : trigger;
     final type = text != null ? 'text' : 'trigger';
     Debounce.milliseconds(
-        900, _postActivity, [postActivityUrl, body, data, type]);
+        900, _postActivity, [postActivityUrl, body, data, type, retried]);
   }
 
-  void _postActivity(url, body, data, type) async {
-    final token = this.dlToken;
-    assert(token != null);
+  void _postActivity(url, body, data, type, retried) async {
+    final secret = Settings.dlSecret;
+    assert(secret != null);
     final response = await http.post(url, body: json.encode(body), headers: {
-      "Authorization": "Bearer $token",
+      "Authorization": "Bearer $secret",
       "Content-Type": 'application/json'
     });
     final responseBody = json.decode(response.body);
     print(responseBody);
-    if (responseBody['error'] != null) {
-      //something went wrong so we should try start a new conversation
-      await _startConversation(
-          onMessage: this.onMessage,
-          onQuickReplies: this.onQuickReplies,
-          onAttachments: this.onAttachments,
-          onReady: this.onReady);
-      if (type == 'text') {
-        send(text: data);
-      } else {
-        send(trigger: data);
-      }
-    }
   }
 
   Future<bool> _startConversation(
@@ -137,20 +120,20 @@ class Conversation {
   }
 
   Future<String> _getStreamUrl() async {
-    // final convoId = await this.convoId;
-    // final streamUrl = convoId == null ? await _createConversation() : await _reconnectToConversation();
-    final streamUrl = await _createConversation();
+    final convoId = await this.convoId;
+    final streamUrl = convoId == null
+        ? await _createConversation()
+        : await _reconnectToConversation();
     assert(streamUrl != null);
     return streamUrl;
   }
 
   Future<String> _createConversation() async {
-    final user = await auth.user;
+    final uid = await auth.uid;
     final secret = Settings.dlSecret;
-    assert(user != null);
+    assert(uid != null);
     assert(secret != null);
-    final uid = user.uid;
-    final userData = {"Id": "dl_$uid"};
+    final userData = {"Id": "$uid"};
     final url =
         "https://directline.botframework.com/v3/directline/conversations";
 
@@ -169,19 +152,19 @@ class Conversation {
     return body['streamUrl'];
   }
 
-//   Future<String> _reconnectToConversation() async {
-//     final secret = Credentials.dlSecret;
-//     final convoId = await this.convoId;
-//     assert(secret != null);
-//     final watermark = await this.watermark;
-//     final url =
-//         "https://directline.botframework.com/v3/directline/conversations/${convoId}?watermark=${watermark}";
+  Future<String> _reconnectToConversation() async {
+    final secret = Settings.dlSecret;
+    final convoId = await this.convoId;
+    assert(secret != null);
+    final watermark = await this.watermark;
+    final url =
+        "https://directline.botframework.com/v3/directline/conversations/${convoId}?watermark=${watermark}";
 
-//     final response =
-//         await http.get(url, headers: {"Authorization": "Bearer $secret"});
-//     final body = json.decode(response.body);
-//     return body['streamUrl'];
-//   }
+    final response =
+        await http.get(url, headers: {"Authorization": "Bearer $secret"});
+    final body = json.decode(response.body);
+    return body['streamUrl'];
+  }
 
   Future<int> refreshToken() async {
     final token = this.dlToken;
