@@ -120,6 +120,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     });
     message.transitionController.forward();
     _updateScroll();
+    _conversation.watermark = item['watermark'];
   }
 
   void _updateScroll() {
@@ -175,7 +176,6 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                         controller: _scrollController,
                         // reverse: true,
                         itemBuilder: (_, int index) {
-                          print('MESSAGES: $_messages');
                           if ((index + 1) > _messages.length) {
                             if (_messages.length > 0 &&
                                 _messages[_messages.length - 1].typing) {

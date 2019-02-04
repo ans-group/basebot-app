@@ -83,20 +83,23 @@ class Conversation {
     assert(channel != null);
 
     onReady();
-    channel.stream.listen((message) {
-      if (message != null) {
+    channel.stream.listen((messageJSON) {
+      if (messageJSON != null) {
         try {
-          final activities = json.decode(message)['activities'];
+          final activities = json.decode(messageJSON)['activities'];
           if (activities == null) {
             return false;
           }
           final item = activities[0];
+          print('WATERMARK IS:');
+          print(json.decode(messageJSON));
           if (onMessage != null && item['type'] == 'message') {
             final message = {
               "from":
                   item['from']['id'] != null ? item['from']['id'] : 'Anonymous',
               "text": item['text'],
-              "typing": item['typing'] != null
+              "typing": item['typing'] != null,
+              "watermark": json.decode(messageJSON)['watermark']
             };
             onMessage(message);
             if (onAttachments != null &&
@@ -193,16 +196,21 @@ class Conversation {
     _convoId = conversationId;
     return conversationId;
   }
-
-  set watermark(watermark) {
+//setStringList
+  set watermark(int watermark) {
+      print("setting watermark to: $watermark");
     SharedPreferences.getInstance().then((prefs) {
-      prefs.setString('watermark', watermark);
+        prefs.setInt('wm', watermark);
     });
   }
 
-  Future<String> get watermark async {
+  Future<int> get watermark async {
     final prefs = await SharedPreferences.getInstance();
-    final watermark = prefs.getString('watermark');
-    return watermark != null ? watermark : '0';
+    int watermark = prefs.getInt('wm');
+    if (watermark == null) {
+        watermark = 0;
+    }
+    print("watermark is: $watermark");
+    return watermark > 3 ? (watermark - 4) : watermark;
   }
 }
