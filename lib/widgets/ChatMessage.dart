@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 import './LoadingDot.dart';
+import '../config/settings.dart';
 
 class ChatMessage extends StatelessWidget {
   ChatMessage({
@@ -33,14 +34,14 @@ class ChatMessage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 8.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: this.name == 'saga'
+                  mainAxisAlignment: this.name == Settings.botHandle
                       ? MainAxisAlignment.start
                       : MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Container(
                       margin: const EdgeInsets.only(right: 7.0),
-                      child: this.name == 'saga'
+                      child: this.name == Settings.botHandle
                           ? CircleAvatar(
                               backgroundImage:
                                   AssetImage('assets/bot_icon.jpg'),
@@ -58,7 +59,7 @@ class ChatMessage extends StatelessWidget {
                           gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment(0.3, 0.6),
-                              colors: this.name == 'saga'
+                              colors: this.name == Settings.botHandle
                                   ? [Colors.white, Colors.white]
                                   : [
                                       Theme.of(context).primaryColor,
@@ -83,7 +84,7 @@ class ChatMessage extends StatelessWidget {
                                             .textTheme
                                             .body1
                                             .copyWith(
-                                                color: this.name == 'saga'
+                                                color: this.name == Settings.botHandle
                                                     ? null
                                                     : Colors.white,
                                                 fontSize: 14.0)),

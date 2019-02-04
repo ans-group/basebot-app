@@ -8,6 +8,7 @@ import './ChatMessage.dart';
 import './ChatAttachment.dart';
 import '../services/conversation.dart';
 import '../services/notifications.dart';
+import '../config/settings.dart';
 
 class ChatScreen extends StatefulWidget {
   _ChatScreenState createState() => _ChatScreenState();
@@ -180,7 +181,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                                 _messages[_messages.length - 1].typing) {
                               ChatMessage _message = ChatMessage(
                                 text: 'typing',
-                                name: 'saga',
+                                name: Settings.botHandle,
                                 typing: true,
                                 loading: true,
                                 transitionController:
