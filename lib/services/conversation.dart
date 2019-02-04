@@ -91,15 +91,13 @@ class Conversation {
             return false;
           }
           final item = activities[0];
-          print('WATERMARK IS:');
-          print(json.decode(messageJSON));
+          final watermark = json.decode(messageJSON)['watermark'];
           if (onMessage != null && item['type'] == 'message') {
             final message = {
               "from":
                   item['from']['id'] != null ? item['from']['id'] : 'Anonymous',
               "text": item['text'],
-              "typing": item['typing'] != null,
-              "watermark": json.decode(messageJSON)['watermark']
+              "typing": item['typing'] != null
             };
             onMessage(message);
             if (onAttachments != null &&
@@ -112,7 +110,11 @@ class Conversation {
           if (onQuickReplies != null &&
               item['quick_replies'] != null &&
               item['quick_replies'].length > 0) {
+                  print(item['quick_replies']);
             onQuickReplies(item['quick_replies']);
+          }
+          if (watermark != null) {
+              this.watermark = watermark;
           }
         } catch (err) {
           return false;

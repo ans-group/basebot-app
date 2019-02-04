@@ -60,7 +60,7 @@ class ChatMessage extends StatelessWidget {
                               begin: Alignment.topLeft,
                               end: Alignment(0.3, 0.6),
                               colors: this.name == Settings.botHandle
-                                  ? [Colors.white, Colors.white]
+                                  ? [Color.fromRGBO(222,222,222,1.0), Color.fromRGBO(220,220,220,1.0),]
                                   : [
                                       Theme.of(context).primaryColor,
                                       Color.alphaBlend(

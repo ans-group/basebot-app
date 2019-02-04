@@ -19,31 +19,29 @@ class Header extends StatelessWidget {
                   alignment: Alignment.topCenter,
                   child: ClipPath(
                     clipper:
-                        HeroClipper(MediaQuery.of(context).size.width / 12),
+                        HeroClipper(MediaQuery.of(context).size.width / 8),
                     child: DecoratedBox(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment(0.3, 0.6),
                             colors: [
-                              Theme.of(context).primaryColor,
-                              Theme.of(context).highlightColor
+                              Color.fromRGBO(220,220,220,1.0),
+                                Color.fromRGBO(210,210,210,1.0)
                             ]),
                       ),
                       child: Container(
                           padding: EdgeInsets.only(
                               top: MediaQuery.of(context).size.width / 17),
-                          child: Column(children: [
-                            Image.asset('assets/bot.png',
-                                fit: BoxFit.scaleDown,
-                                alignment: Alignment.topCenter,
-                                width: MediaQuery.of(context).size.width / 7),
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
                             Text(
                               Settings.botName.toUpperCase(),
                               style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white),
+                                  fontSize: 23.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).primaryColor),
                             ),
                           ])),
                     ),

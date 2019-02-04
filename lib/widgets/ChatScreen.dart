@@ -120,7 +120,6 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     });
     message.transitionController.forward();
     _updateScroll();
-    _conversation.watermark = item['watermark'];
   }
 
   void _updateScroll() {
@@ -145,7 +144,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
               controller: _textController,
               onSubmitted: _handleSubmitted,
               decoration:
-                  InputDecoration.collapsed(hintText: "Ask me a question..."),
+                  InputDecoration.collapsed(hintText: "Ask me a question...", fillColor: Color.fromRGBO(220,220,220,1.0)),
             ),
           ),
           Container(
@@ -162,7 +161,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(246, 247, 247, 1.0),
+        backgroundColor: Colors.white,
         body: IconTheme(
             data: IconThemeData(color: Theme.of(context).primaryColor),
             child: _loading
