@@ -110,11 +110,11 @@ class Conversation {
           if (onQuickReplies != null &&
               item['quick_replies'] != null &&
               item['quick_replies'].length > 0) {
-                  print(item['quick_replies']);
+            print(item['quick_replies']);
             onQuickReplies(item['quick_replies']);
           }
           if (watermark != null) {
-              this.watermark = watermark;
+            this.watermark = watermark;
           }
         } catch (err) {
           return false;
@@ -198,19 +198,20 @@ class Conversation {
     _convoId = conversationId;
     return conversationId;
   }
+
 //setStringList
   set watermark(int watermark) {
-      print("setting watermark to: $watermark");
+    print("setting watermark to: $watermark");
     SharedPreferences.getInstance().then((prefs) {
-        prefs.setInt('wm', watermark);
+      prefs.setInt('wm', watermark);
     });
   }
 
-  Future<int> get watermark async {
+  get watermark async {
     final prefs = await SharedPreferences.getInstance();
     int watermark = prefs.getInt('wm');
     if (watermark == null) {
-        watermark = 0;
+      watermark = 0;
     }
     print("watermark is: $watermark");
     return watermark > 3 ? (watermark - 4) : watermark;
