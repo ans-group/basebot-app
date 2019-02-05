@@ -1,5 +1,7 @@
 # Basebot App
 
+**We're still in the process of open-sourcing the various components of this framework. Please bare with us while we publish and document everything**
+
 This repo contains the two native IOS and Android apps for Basebot - built with [Flutter](https://flutter.io)
 
 Setup
@@ -32,10 +34,11 @@ To update the icons & images just use the ones currently in `play-store-listing`
 - **play-store-listing/icon.png** The Play Store icon
 - **play-store-listing/screen1/2/3.jpg** 3 screenshots for the Play Store
 
-**:warning: You need to run run `basebot icons` after changing these files to generate new launcher icons**
+*:information_source: to generate icons for both IOS and Android just run `basebot icons` after changing the icons files above*
 
 ### Building
-Thanks to the magic of CI building should happen automatically. Just push to master :+1: 
+
+TODO
 
 ---
 
