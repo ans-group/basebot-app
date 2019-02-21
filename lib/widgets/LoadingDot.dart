@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class LoadingDot extends StatefulWidget {
-  LoadingDot({this.delay});
+  LoadingDot({this.delay, this.size: 8.0});
   final double delay;
+  final double size;
   _LoadingDotState createState() => _LoadingDotState();
 }
 
@@ -38,9 +39,9 @@ class _LoadingDotState extends State<LoadingDot> with TickerProviderStateMixin {
             parent: animationController,
             curve: Interval(widget.delay, 1.0, curve: Curves.easeOut)),
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 1.5),
-          width: 8.0,
-          height: 8.0,
+          margin: EdgeInsets.symmetric(horizontal: widget.size / 4),
+          width: widget.size,
+          height: widget.size,
           decoration: new BoxDecoration(
             color: Colors.black26,
             shape: BoxShape.circle,

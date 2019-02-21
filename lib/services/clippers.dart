@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class HeroClipper extends CustomClipper<Path> {
+class HeaderClipper extends CustomClipper<Path> {
   double _curveHeight;
 
-  HeroClipper(this._curveHeight);
+  HeaderClipper(this._curveHeight);
 
   @override
   Path getClip(Size size) {

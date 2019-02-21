@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../services/clippers.dart';
+import './LoadingDot.dart';
 import '../config/settings.dart';
 
 class Loading extends StatelessWidget {
@@ -10,47 +10,38 @@ class Loading extends StatelessWidget {
       children: <Widget>[
         Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Flexible(
-              flex: 1,
-              fit: FlexFit.tight,
-              child: ClipPath(
-                clipper: HeroClipper(35.0),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment(0.3, 0.6),
-                        colors: [
-                          Theme.of(context).primaryColor,
-                          Theme.of(context).highlightColor
-                        ]),
+            flex: 1,
+            fit: FlexFit.tight,
+            child: Container(
+                padding:
+                    EdgeInsets.symmetric(horizontal: 30.0, vertical: 100.0),
+                child: Column(children: [
+                  Text(
+                    Settings.introText,
+                    style: TextStyle(
+                        fontSize: 42.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black),
                   ),
-                  child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 100.0),
-                      child: Column(children: [
-                        Image.asset('assets/bot.png',
-                            fit: BoxFit.scaleDown,
-                            alignment: Alignment.topCenter,
-                            width: 270.0),
-                        Text(
-                          Settings.introText,
-                          style: TextStyle(
-                              fontSize: 32.0,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white),
-                        ),
-                      ])),
-                ),
-              ))
+                  Container(
+                      padding: EdgeInsets.only(top: 70.0),
+                      child: Image.asset('assets/bot.png',
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.topCenter,
+                          width: 420.0)),
+                ])),
+          )
         ]),
         Flexible(
             fit: FlexFit.tight,
             child: Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.symmetric(vertical: 50.0),
-                child: Text('loading...',
-                    style: TextStyle(
-                        fontSize: 25.0, fontWeight: FontWeight.w700))))
+                padding: EdgeInsets.only(bottom: 100.0),
+                child: Row(mainAxisSize: MainAxisSize.min, children: [
+                  LoadingDot(delay: 0.0, size: 20.0),
+                  LoadingDot(delay: 0.3, size: 20.0),
+                  LoadingDot(delay: 0.6, size: 20.0),
+                ])))
       ],
     );
   }

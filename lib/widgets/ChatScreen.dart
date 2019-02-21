@@ -16,7 +16,8 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   Conversation _conversation;
-  final ScrollController _scrollController = new ScrollController();
+  final ScrollController _scrollController =
+      ScrollController(keepScrollOffset: true, initialScrollOffset: 99999.99);
   final TextEditingController _textController = TextEditingController();
   final List _messages = [];
   List<QuickReplyButton> _quickReplies = <QuickReplyButton>[];
@@ -143,8 +144,9 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             child: TextField(
               controller: _textController,
               onSubmitted: _handleSubmitted,
-              decoration:
-                  InputDecoration.collapsed(hintText: "Ask me a question...", fillColor: Color.fromRGBO(220,220,220,1.0)),
+              decoration: InputDecoration.collapsed(
+                  hintText: "Ask me a question...",
+                  fillColor: Color.fromRGBO(220, 220, 220, 1.0)),
             ),
           ),
           Container(
