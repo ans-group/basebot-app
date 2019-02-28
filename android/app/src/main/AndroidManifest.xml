@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ans.basebot"
+    package="com.ans.basebotdemo"
     >
 
     <!-- The INTERNET permission is required for development. Specifically,

@@ -169,7 +169,16 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
             child: _loading
                 ? Loading()
                 : Stack(children: [
-                    Column(children: [
+                    Container(
+                              decoration: BoxDecoration(
+                                  gradient: RadialGradient(
+                                      colors: [
+                                          Color.fromRGBO(250, 250, 250, 1.0),
+                                          Color.fromRGBO(240, 240, 240, 1.0),
+                                      ]
+                                  ),
+                              ),
+                              child: Column(children: [
                       Flexible(
                           child: ListView.builder(
                         padding: new EdgeInsets.only(
@@ -213,7 +222,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                           decoration:
                               BoxDecoration(color: Theme.of(context).cardColor),
                           child: _buildTextComposer())
-                    ]),
+                    ])),
                     Header()
                   ])));
   }

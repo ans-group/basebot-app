@@ -43,7 +43,7 @@ class _LoadingDotState extends State<LoadingDot> with TickerProviderStateMixin {
           width: widget.size,
           height: widget.size,
           decoration: new BoxDecoration(
-            color: Colors.black26,
+            color: Theme.of(context).primaryColor,
             shape: BoxShape.circle,
           ),
         ),

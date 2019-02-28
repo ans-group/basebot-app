@@ -13,11 +13,11 @@ class Header extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment(0.3, 0.6),
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
               colors: [
+                Color.fromRGBO(230, 230, 230, 1.0),
                 Color.fromRGBO(220, 220, 220, 1.0),
-                Color.fromRGBO(210, 210, 210, 1.0)
               ]),
         ),
         child: Container(
@@ -26,17 +26,18 @@ class Header extends StatelessWidget {
                 left: MediaQuery.of(context).size.width / 20,
                 right: MediaQuery.of(context).size.width / 20),
             child: Row(children: [
-              Expanded(
-                  child: Text(
-                Settings.botName,
-                style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width / 11,
-                    fontWeight: FontWeight.bold),
-              )),
+              Flexible(
+                  flex: 1,
+                  fit: FlexFit.tight,
+                  child: Container(
+                      padding:EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.width / 15),
+                      child: Image.asset('assets/logo.png',
+                          fit: BoxFit.fitHeight,
+                          alignment: Alignment.centerLeft))),
               CircleAvatar(
-                  backgroundImage: AssetImage('assets/bot_icon.jpg'),
+                  backgroundImage: AssetImage('assets/bot_icon.png'),
                   backgroundColor: Colors.transparent,
-                  radius: MediaQuery.of(context).size.width / 15)
+                  radius: MediaQuery.of(context).size.width / 14)
             ])),
       ),
     );

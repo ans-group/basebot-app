@@ -1,4 +1,4 @@
-package com.ans.basebot;
+package com.ans.basebotdemo;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

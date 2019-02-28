@@ -44,9 +44,9 @@ class ChatMessage extends StatelessWidget {
                       child: this.name == Settings.botHandle
                           ? CircleAvatar(
                               backgroundImage:
-                                  AssetImage('assets/bot_icon.jpg'),
-                              backgroundColor: Theme.of(context).primaryColor,
-                              radius: 11.0)
+                                  AssetImage('assets/bot_icon.png'),
+                              backgroundColor: Colors.transparent,
+                              radius: 20.0)
                           : null,
                     ),
                     Container(
@@ -56,17 +56,9 @@ class ChatMessage extends StatelessWidget {
                           maxWidth: 320.0,
                         ),
                         decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment(0.3, 0.6),
-                              colors: this.name == Settings.botHandle
-                                  ? [Color.fromRGBO(222,222,222,1.0), Color.fromRGBO(220,220,220,1.0),]
-                                  : [
-                                      Theme.of(context).primaryColor,
-                                      Color.alphaBlend(
-                                          Color.fromRGBO(255, 255, 255, 0.1),
-                                          Theme.of(context).primaryColor)
-                                    ]),
+                            color: this.loading ? Colors.transparent : (this.name == Settings.botHandle 
+                                ? Theme.of(context).primaryColor
+                                : Color.fromRGBO(220,220,220,1.0)),
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         ),
                         child: this.loading
@@ -84,7 +76,7 @@ class ChatMessage extends StatelessWidget {
                                             .textTheme
                                             .body1
                                             .copyWith(
-                                                color: this.name == Settings.botHandle
+                                                color: this.name != Settings.botHandle
                                                     ? null
                                                     : Colors.white,
                                                 fontSize: 14.0)),
