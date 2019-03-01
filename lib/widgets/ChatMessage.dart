@@ -46,7 +46,7 @@ class ChatMessage extends StatelessWidget {
                               backgroundImage:
                                   AssetImage('assets/bot_icon.png'),
                               backgroundColor: Colors.transparent,
-                              radius: 20.0)
+                              radius: 16.0)
                           : null,
                     ),
                     Container(
@@ -56,9 +56,11 @@ class ChatMessage extends StatelessWidget {
                           maxWidth: 320.0,
                         ),
                         decoration: BoxDecoration(
-                            color: this.loading ? Colors.transparent : (this.name == Settings.botHandle 
-                                ? Theme.of(context).primaryColor
-                                : Color.fromRGBO(220,220,220,1.0)),
+                          color: this.loading
+                              ? Colors.transparent
+                              : (this.name == Settings.botHandle
+                                  ? Theme.of(context).primaryColor
+                                  : Color.fromRGBO(220, 220, 220, 1.0)),
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         ),
                         child: this.loading
@@ -76,7 +78,8 @@ class ChatMessage extends StatelessWidget {
                                             .textTheme
                                             .body1
                                             .copyWith(
-                                                color: this.name != Settings.botHandle
+                                                color: this.name !=
+                                                        Settings.botHandle
                                                     ? null
                                                     : Colors.white,
                                                 fontSize: 14.0)),
