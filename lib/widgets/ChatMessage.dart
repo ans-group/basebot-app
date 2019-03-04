@@ -53,7 +53,7 @@ class ChatMessage extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                             horizontal: 15.0, vertical: 8.0),
                         constraints: BoxConstraints(
-                          maxWidth: 320.0,
+                          maxWidth: 280.0,
                         ),
                         decoration: BoxDecoration(
                           color: this.loading
