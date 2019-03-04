@@ -17,7 +17,7 @@ class Loading extends StatelessWidget {
                 fit: FlexFit.tight,
                 child: Container(
                     padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.width * 0.4),
+                        top: MediaQuery.of(context).size.width * 0.3),
                     child: Column(children: [
                       Image.asset('assets/logo.png',
                           fit: BoxFit.scaleDown,
@@ -28,15 +28,15 @@ class Loading extends StatelessWidget {
                               top: MediaQuery.of(context).size.width * 0.2),
                           child: Image.asset('assets/bot.png',
                               fit: BoxFit.scaleDown,
-                              alignment: Alignment.topCenter,
-                              width: MediaQuery.of(context).size.width * 0.45)),
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width * 0.35)),
                     ])),
               )
             ])),
         Container(
             alignment: Alignment.center,
             padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.width * 0.4),
+                bottom: MediaQuery.of(context).size.width * 0.3),
             child: Row(mainAxisSize: MainAxisSize.min, children: [
               LoadingDot(delay: 0.0, size: 20.0),
               LoadingDot(delay: 0.3, size: 20.0),
