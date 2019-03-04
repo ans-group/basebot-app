@@ -102,6 +102,9 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   }
 
   void _handleMessage(Map item) {
+    if (item['type'] != 'message') {
+      return;
+    }
     final name = item['from'];
     final text = item['text'];
     final typing = item['typing'];
@@ -170,59 +173,57 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                 ? Loading()
                 : Stack(children: [
                     Container(
+                        decoration: BoxDecoration(
+                          gradient: RadialGradient(colors: [
+                            Color.fromRGBO(250, 250, 250, 1.0),
+                            Color.fromRGBO(240, 240, 240, 1.0),
+                          ]),
+                        ),
+                        child: Column(children: [
+                          Flexible(
+                              child: ListView.builder(
+                            padding: new EdgeInsets.only(
+                                left: 8.0, right: 8.0, top: 130.0),
+                            controller: _scrollController,
+                            // reverse: true,
+                            itemBuilder: (_, int index) {
+                              if ((index + 1) > _messages.length) {
+                                if (_messages.length > 0 &&
+                                    _messages[_messages.length - 1].typing) {
+                                  ChatMessage _message = ChatMessage(
+                                    text: 'typing',
+                                    name: Settings.botHandle,
+                                    typing: true,
+                                    loading: true,
+                                    transitionController:
+                                        _messages[0].transitionController,
+                                  );
+                                  return _message;
+                                }
+                              } else {
+                                return _messages[index];
+                              }
+                            },
+                            itemCount:
+                                _messages.length > 0 ? _messages.length + 1 : 0,
+                          )),
+                          Container(
+                              height: _quickReplies.length > 0 ? 65.0 : 0.0,
+                              alignment: Alignment.centerRight,
+                              child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  children: _quickReplies
+                                      .map((reply) => reply)
+                                      .toList())),
+                          Divider(
+                              height: 1.0,
+                              color: Color.fromRGBO(229, 230, 230, 1.0)),
+                          Container(
                               decoration: BoxDecoration(
-                                  gradient: RadialGradient(
-                                      colors: [
-                                          Color.fromRGBO(250, 250, 250, 1.0),
-                                          Color.fromRGBO(240, 240, 240, 1.0),
-                                      ]
-                                  ),
-                              ),
-                              child: Column(children: [
-                      Flexible(
-                          child: ListView.builder(
-                        padding: new EdgeInsets.only(
-                            left: 8.0, right: 8.0, top: 130.0),
-                        controller: _scrollController,
-                        // reverse: true,
-                        itemBuilder: (_, int index) {
-                          if ((index + 1) > _messages.length) {
-                            if (_messages.length > 0 &&
-                                _messages[_messages.length - 1].typing) {
-                              ChatMessage _message = ChatMessage(
-                                text: 'typing',
-                                name: Settings.botHandle,
-                                typing: true,
-                                loading: true,
-                                transitionController:
-                                    _messages[0].transitionController,
-                              );
-                              return _message;
-                            }
-                          } else {
-                            return _messages[index];
-                          }
-                        },
-                        itemCount:
-                            _messages.length > 0 ? _messages.length + 1 : 0,
-                      )),
-                      Container(
-                          height: _quickReplies.length > 0 ? 65.0 : 0.0,
-                          alignment: Alignment.centerRight,
-                          child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              children: _quickReplies
-                                  .map((reply) => reply)
-                                  .toList())),
-                      Divider(
-                          height: 1.0,
-                          color: Color.fromRGBO(229, 230, 230, 1.0)),
-                      Container(
-                          decoration:
-                              BoxDecoration(color: Theme.of(context).cardColor),
-                          child: _buildTextComposer())
-                    ])),
+                                  color: Theme.of(context).cardColor),
+                              child: _buildTextComposer())
+                        ])),
                     Header()
                   ])));
   }
