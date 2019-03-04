@@ -102,9 +102,6 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   }
 
   void _handleMessage(Map item) {
-    if (item['type'] != 'message') {
-      return;
-    }
     final name = item['from'];
     final text = item['text'];
     final typing = item['typing'];
